@@ -11,9 +11,9 @@ import com.mail.entity.User;
 public interface MailRepository extends JpaRepository<Mail, Integer>{
 
 	@Query("SELECT m from Mail m JOIN m.user u WHERE u.userId = ?1 AND m.type= 'RECIEVED' ORDER BY m.dateAndTime DESC ")
-	//@Query("SELECT m from User m WHERE m.userId = ?1 ")
 	public List<Mail> findByUserRecieved(int userId);
 	
-	//public List<Mail> findByUser();
+	@Query("SELECT m from Mail m JOIN m.user u WHERE u.userId = ?1 AND m.type= 'SENT' ORDER BY m.dateAndTime DESC ")
+	public List<Mail> findByUserSent(int userId);
 };
 

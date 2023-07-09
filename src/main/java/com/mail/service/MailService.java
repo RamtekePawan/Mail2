@@ -57,4 +57,11 @@ public class MailService {
 		return mailRepo.findByUserRecieved(userId);
 		
 	}
+	
+	public List<Mail> getSentMails(int userId){
+		
+		return mailRepo.findByUserSent(userId);
+		
+	}
+	
 }
