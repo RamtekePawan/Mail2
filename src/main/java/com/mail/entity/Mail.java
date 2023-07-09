@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="tbl_mail2")
 public class Mail {
@@ -30,19 +31,13 @@ public class Mail {
 	@JoinColumn(name = "userId")
 	private User user;
 
-
-	public String getType() {
-		return type;
-	}
-
-
-	public void setType(String type) {
-		this.type = type;
-	}
 	public int getMailId() {
 		return mailId;
 	}
 
+	public void setMailId(int mailId) {
+		this.mailId = mailId;
+	}
 
 	public String getMessage() {
 		return message;
@@ -68,6 +63,22 @@ public class Mail {
 		this.dateAndTime = dateAndTime;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isImportant() {
+		return isImportant;
+	}
+
+	public void setImportant(boolean isImportant) {
+		this.isImportant = isImportant;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -77,13 +88,6 @@ public class Mail {
 	}
 
 
-	public boolean isImportant() {
-		return isImportant;
-	}
 
-
-	public void setImportant(boolean isImportant) {
-		this.isImportant = isImportant;
-	}
 }
 

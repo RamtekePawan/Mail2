@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_user2")
 public class User {
@@ -27,7 +29,8 @@ public class User {
 	
 	private boolean isAdmin;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",targetEntity = Mail.class)
+	@JsonIgnore
 	List<Mail> mails;
 
 	public int getUserId() {

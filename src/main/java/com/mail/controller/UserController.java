@@ -24,7 +24,7 @@ public class UserController {
 		return "User Added Successfully";
 	}
 	
-	@GetMapping("/get-users")
+	@PostMapping("/get-users")  
 	public List<User> getAllUsers() {
 		return userServ.getAllUser();
 	}

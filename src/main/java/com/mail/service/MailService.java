@@ -25,8 +25,8 @@ public class MailService {
 	public void saveMail(String toEmail,int fromUserId, Mail mail) {
 		
 		User toUser = userRepo.findByUserEmail(toEmail);
-		
-		System.out.println(toUser.getUserEmail());
+//		
+//		System.out.println(toUser.getUserEmail());
 		
 		
 		User fromUser = userRepo.findByUserId(fromUserId);
