@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,13 +38,75 @@ public class UserController {
 		return "User Added Successfully";
 	}
 	
-	@PostMapping("/get-users")  
-	public List<User> getAllUsers() {
-		return userServ.getAllUser();
+//	@PostMapping("/get-users")  
+//	public List<User> getAllUsers() {
+//		return userServ.getAllUser();
+//	}
+	
+	@GetMapping("/delete-user")
+	public ResponseEntity<?> deleteUser(HttpServletRequest request) {
+	    try {
+	    	
+	    	String email = request.getParameter("email");
+	    	userServ.deleteUser(email);
+	    } catch (Exception e) {
+	        String errorMessage = "An error occurred while retrieving the User List.";
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	    }
+		return null;
 	}
 	
+//	@PutMapping("/user")
+//	public User updateUser(@RequestBody User user) {
+//		return this.userService.updateUser(user);
+//	}
 	
-	@GetMapping("/login-user")
+	
+	@PostMapping("/update-user2")
+	public ResponseEntity<?> updateUser2(@RequestBody User newUser) {
+	    // Get the user from the database by their ID
+		
+		System.out.println("Updated ::::: "+newUser.getUserEmail()+"  "+ newUser.getUserName());
+		
+	    User user = userRepo.findByUserEmail(newUser.getUserEmail());
+	    System.out.println("existing user :"+ user.getUserName());
+	    
+	    // If the user doesn't exist, return null
+	    if (user == null) {
+	        return null;
+	    }
+
+	    // Update the user's information with the new information from the request body
+	    user.setUserName(newUser.getUserName());
+	    user.setUserEmail(newUser.getUserEmail());
+	    user.setUserPassword(newUser.getUserPassword());
+
+	    // Save the updated user to the database
+	    userRepo.save(user);
+
+	    // Return the updated user
+	    return ResponseEntity.ok(user);
+	}
+	
+
+	@PostMapping("/get-users")
+	public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
+	    try {
+
+	    	List<User> list = userServ.getAllUser();
+			
+			if(list != null)
+				
+				return ResponseEntity.ok(list);
+			else
+				throw new Exception();
+	    } catch (Exception e) {
+	        String errorMessage = "An error occurred while retrieving the User List.";
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	    }
+	}
+	
+	@PostMapping("/login-user")
 	public ResponseEntity<?> getUserForLogin(HttpServletRequest request) {
 	    try {
 

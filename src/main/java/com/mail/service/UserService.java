@@ -24,13 +24,22 @@ public class UserService {
 	
 	public void saveUser(User user) {
 		userRepo.save(user);
+		
 	}
+	
+	
 	
 	public User getLoginUser(String email, String pass) {
 		
 		
 		return userRepo.findByUserEmailAndUserPassword(email,pass);
 		//
+	}
+
+	public void deleteUser( String email) {
+		User user =userRepo.findByUserEmail(email);
+		
+		userRepo.delete(user);
 	}
 	
 

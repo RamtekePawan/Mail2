@@ -21,7 +21,7 @@ import com.mail.entity.User;
 import com.mail.service.MailService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin("*")
 public class MailController {
 	
 	@Autowired

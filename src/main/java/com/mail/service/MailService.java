@@ -27,11 +27,7 @@ public class MailService {
 		User toUser = userRepo.findByUserEmail(toEmail);
 //		
 //		System.out.println(toUser.getUserEmail());
-		
-		
 		User fromUser = userRepo.findByUserId(fromUserId);
-		
-		System.out.println(fromUser.getUserEmail());
 
 		Mail toMail = new Mail();
 		toMail.setDateAndTime(LocalDateTime.now());
@@ -40,7 +36,7 @@ public class MailService {
 		toMail.setMessage(mail.getMessage());
 		toMail.setSubject(mail.getSubject());
 		
-		System.out.println("to Mail , saveMail : "+toMail.toString());
+		//System.out.println("to Mail , saveMail : "+toMail.toString());
 		mailRepo.save(toMail);
 		
 		Mail fromMail = new Mail();
@@ -49,6 +45,7 @@ public class MailService {
 		fromMail.setUser(fromUser);
 		fromMail.setMessage(mail.getMessage());
 		fromMail.setSubject(mail.getSubject());
+		
 		mailRepo.save(fromMail);
 	}
 	
